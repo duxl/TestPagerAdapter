@@ -1,2 +1,13 @@
 # TestPagerAdapter
 ViewPager设置Fragment，刷新Fragment更新不了问题
+
+解决方案是把FragmentPagerAdapter改成FragmentStatePagerAdapter
+
+报错的原因在这篇文章中可能会找到
+https://www.jianshu.com/p/4840994e3c43
+
+## 两个Adaper的主要区别
+
+FragmentStatePagerAdapter 对fragment进行完全的添加和删除操作，
+
+而FragmentPagerAdapter 则是对视图进行attach和detach
