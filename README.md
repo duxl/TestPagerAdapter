@@ -1,0 +1,2 @@
+# TestPagerAdapter
+ViewPager设置Fragment，刷新Fragment更新不了问题
