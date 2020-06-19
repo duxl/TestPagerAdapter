@@ -20,6 +20,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="onGeText"
-        android:text="获取第一个Fragment的Text" />
+        android:text="get第一个Fragment的Text" />
 
 </LinearLayout>

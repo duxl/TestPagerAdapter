@@ -1,8 +1,10 @@
 package a.b.c;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.viewpager.widget.ViewPager;
 
@@ -18,12 +20,12 @@ import butterknife.BindView;
 public class MainActivity extends BaseActivity {
 
     public static List<String> list = new ArrayList<>();
-    static int count=0;
+    static int count = 0;
 
     @BindView(R.id.viewPager)
     ViewPager mViewPager;
 
-    MyPagerAdapter mPagerAdapter;
+    MyPagerAdapter mAdapter;
 
     @Override
     protected int getLayoutResid() {
@@ -33,14 +35,26 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mViewPager.setAdapter(mPagerAdapter = new MyPagerAdapter(getSupportFragmentManager()));
+        mViewPager.setAdapter(mAdapter = new MyPagerAdapter(getSupportFragmentManager()));
         mViewPager.setOffscreenPageLimit(10);
         onRefresh(null);
+
+        AlertDialog dialog = new AlertDialog
+                .Builder(this)
+                .setPositiveButton("确定", null)
+                .create();
+        dialog.setMessage("先点上面的刷新，再点下面的get按钮，居然会报错");
+        dialog.show();
+
+        // TODO: 报错的原因在这篇文章中可能会找到
+        // TODO: https://www.jianshu.com/p/4840994e3c43
     }
 
     public void onGeText(View v) {
-        String text = mPagerAdapter.getItem(0).getText();
+        String text = mAdapter.getItem(0).getText();
         Log.i("duxl", "text.length=" + text.length());
+        Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
+
     }
 
     public void onRefresh(View v) {
@@ -49,6 +63,6 @@ public class MainActivity extends BaseActivity {
         for (int i = 0; i < 3; i++) {
             list.add(String.valueOf(++count));
         }
-        mPagerAdapter.notifyDataSetChanged();
+        mAdapter.notifyDataSetChanged();
     }
 }
